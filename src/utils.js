@@ -19,6 +19,7 @@ const getRandomPositiveNumber = (min = 0, max = 1) => {
 const getRandomArrayElement = (items) => items[getRandomPositiveNumber(0, items.length - 1)];
 
 const formatStringToDate = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
+const formatStringToDelimetrDate = (date) => dayjs(date).format('DD/MM/YY HH:mm');
 const formatStringToShortDate = (date) => dayjs(date).format('MMM DD');
 const formatStringToTime = (date) => dayjs(date).format('HH:mm');
 
@@ -46,6 +47,7 @@ export {
   formatStringToDate,
   formatStringToShortDate,
   formatStringToTime,
+  formatStringToDelimetrDate,
   toCapitalize,
-  calcDuration
+  calcDuration,
 };

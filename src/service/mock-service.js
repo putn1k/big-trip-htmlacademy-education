@@ -30,6 +30,10 @@ export default class MockService {
     this.points = this.generatePoints();
   }
 
+  getPoints() {
+    return this.points;
+  }
+
   getDestinations() {
     return this.destinations;
   }
@@ -38,9 +42,6 @@ export default class MockService {
     return this.offers;
   }
 
-  getPoints() {
-    return this.points;
-  }
 
   generateDestinations() {
     return Array.from({

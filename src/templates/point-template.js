@@ -24,11 +24,11 @@ const getCheckedOffers = (allOffers, pointOffersIDs) => {
 };
 
 const createOffersTemplate = (offers) => {
-  const items = offers.reduce((markup, offer) => `${markup}
+  const items = offers.reduce((markup, {title, price}) => `${markup}
      <li class="event__offer">
-      <span class="event__offer-title">${offer.title}</span>
+      <span class="event__offer-title">${title}</span>
       &plus;&euro;&nbsp;
-      <span class="event__offer-price">${offer.price}</span>
+      <span class="event__offer-price">${price}</span>
     </li>`, '');
 
   if (offers.length > 0) {
@@ -38,8 +38,9 @@ const createOffersTemplate = (offers) => {
       ${items}
     </ul>
     `;
+  } else {
+    return '';
   }
-  return '';
 };
 
 const createSheduleTemplate = (dateFrom, dateTo) =>
