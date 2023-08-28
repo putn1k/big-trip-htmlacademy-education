@@ -5,6 +5,7 @@ import {
 } from '../templates/trip-info-template.js';
 
 export default class TripInfoView extends AbstractView {
+
   get template() {
     return createTripInfoTemplate();
   }
