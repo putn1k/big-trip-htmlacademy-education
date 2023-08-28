@@ -12,7 +12,7 @@ const createFilterTypeListTemplate = (filterTypeList) => filterTypeList.reduce((
     <label class="trip-filters__filter-label" for="filter-${type}">${toCapitalize(type)}</label>
   </div>`, '');
 
-function createFiltersTemplate() {
+function createFiltersTemplate () {
   return (
     `<form class="trip-filters" action="#" method="get">
       ${createFilterTypeListTemplate(FILTER_TYPES)}
