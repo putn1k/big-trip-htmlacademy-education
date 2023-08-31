@@ -38,6 +38,7 @@ const calcDuration = (dateFrom, dateTo) => {
 };
 
 const toCapitalize = (str) => `${str[0].toUpperCase()}${str.slice(1)}`;
+const updateItem = (items, update) => items.map((item) => item.id === update.id ? update : item);
 
 export {
   MSEC_IN_HOUR,
@@ -50,4 +51,5 @@ export {
   formatStringToDelimetrDate,
   toCapitalize,
   calcDuration,
+  updateItem
 };
