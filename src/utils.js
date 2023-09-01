@@ -66,5 +66,5 @@ export {
   toCapitalize,
   calcDuration,
   updateItem,
-  filter
+  filter,
 };

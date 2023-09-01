@@ -3,8 +3,8 @@ import {
 } from '../framework/render.js';
 import EventListView from '../view/event-list-view.js';
 import EventLisEmptytView from '../view/event-list-empty-view.js';
-import SortingView from '../view/sorting-view.js';
 import PointPresenter from './point-presenter.js';
+import SortPresenter from './sort-presenter.js';
 import {updateItem} from '../utils.js';
 
 const pointsContainer = document.querySelector('.trip-events');
@@ -15,7 +15,6 @@ export default class PointsPresenter {
   #pointsModel = null;
   #points = [];
   #listComponent = new EventListView();
-  #sortingComponent = new SortingView();
   #pointsPresenter = new Map();
 
   constructor({
@@ -40,7 +39,11 @@ export default class PointsPresenter {
   }
 
   #renderSort() {
-    render(this.#sortingComponent, pointsContainer);
+    const sortPresenter = new SortPresenter({
+      container: pointsContainer
+    });
+
+    sortPresenter.init();
   }
 
   #handleDataChange = (updatedPoint) => {

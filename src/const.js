@@ -7,27 +7,22 @@ const FilterType = {
   PRESENT: 'present',
   PAST: 'past'
 };
-const SortTypes = [{
-  type: 'day',
-  isDisabled: false,
-  isChecked: true
-}, {
-  type: 'event',
-  isDisabled: true,
-  isChecked: false
-}, {
-  type: 'time',
-  isDisabled: false,
-  isChecked: false
-}, {
-  type: 'price',
-  isDisabled: false,
-  isChecked: false
-}, {
-  type: 'offer',
-  isDisabled: true,
-  isChecked: false
-}];
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFER: 'offer',
+};
+
+const enabledSortType = {
+  [SortType.DAY]: true,
+  [SortType.EVENT]: false,
+  [SortType.TIME]: true,
+  [SortType.PRICE]: true,
+  [SortType.OFFER]: false,
+};
+
 const Counts = {
   DESTINATIONS: 10,
   DESCRIPTION_PHOTO: 4,
@@ -53,7 +48,8 @@ export {
   DESCRIPTION,
   EVENT_TYPES,
   FilterType,
-  SortTypes,
+  SortType,
+  enabledSortType,
   Counts,
   Price,
   Duration,
