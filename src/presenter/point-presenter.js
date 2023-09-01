@@ -5,6 +5,7 @@ import {
 } from '../framework/render.js';
 import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view.js';
+import {Mode} from '../const.js';
 
 export default class PointPresenter {
   #pointListContainer = null;
@@ -12,19 +13,23 @@ export default class PointPresenter {
   #pointEditComponent = null;
   #point = null;
   #handleDataChange = null;
+  #handleModeChange = null;
   #destinationsModel = null;
   #offersModel = null;
+  #mode = Mode.DEFAULT;
 
   constructor({
     pointListContainer,
     destinationsModel,
     offersModel,
-    onPointChange
+    onPointChange,
+    onModeChange
   }) {
     this.#pointListContainer = pointListContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#handleDataChange = onPointChange;
+    this.#handleModeChange = onModeChange;
   }
 
   init(point) {
@@ -53,16 +58,22 @@ export default class PointPresenter {
       return;
     }
 
-    if (this.#pointListContainer.contains(prevPointComponent.element)) {
+    if(this.#mode === Mode.DEFAULT) {
       replace(this.#pointComponent, prevPointComponent);
     }
 
-    if (this.#pointListContainer.contains(prevPointEditComponent.element)) {
+    if(this.#mode === Mode.EDITING) {
       replace(this.#pointEditComponent, prevPointEditComponent);
     }
 
     remove(prevPointComponent);
     remove(prevPointEditComponent);
+  }
+
+  resetView() {
+    if(this.#mode !== Mode.DEFAULT) {
+      this.#replaceEditorToPoint();
+    }
   }
 
   destroy() {
@@ -73,11 +84,14 @@ export default class PointPresenter {
   #replacePointToEditor() {
     replace(this.#pointEditComponent, this.#pointComponent);
     document.addEventListener('keydown', this.#escKeyDownHandler);
+    this.#handleModeChange();
+    this.#mode = Mode.EDITING;
   }
 
   #replaceEditorToPoint() {
     replace(this.#pointComponent, this.#pointEditComponent);
     document.removeEventListener('keydown', this.#escKeyDownHandler);
+    this.#mode = Mode.DEFAULT;
   }
 
   #escKeyDownHandler = (evt) => {

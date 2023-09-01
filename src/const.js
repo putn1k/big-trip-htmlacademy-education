@@ -38,6 +38,10 @@ const Duration = {
   DAY: 3,
   MINUTE: 59
 };
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
 
 export {
   CITIES,
@@ -47,5 +51,6 @@ export {
   SortTypes,
   Counts,
   Price,
-  Duration
+  Duration,
+  Mode
 };

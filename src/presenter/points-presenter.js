@@ -48,6 +48,10 @@ export default class PointsPresenter {
     this.#pointsPresenter.get(updatedPoint.id).init(updatedPoint);
   };
 
+  #handleModeChange = () => {
+    this.#pointsPresenter.forEach((presenter) => presenter.resetView());
+  };
+
   #renderEmptyList() {
     render(new EventLisEmptytView(), pointsContainer);
   }
@@ -68,7 +72,8 @@ export default class PointsPresenter {
       pointListContainer: this.#listComponent.element,
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel,
-      onPointChange: this.#handleDataChange
+      onPointChange: this.#handleDataChange,
+      onModeChange: this.#handleModeChange
     });
 
     pointPresenter.init(point);
