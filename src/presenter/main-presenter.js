@@ -14,7 +14,7 @@ const destinationsModel = new DestinationsModel(mockService);
 const offersModel = new OffersModel(mockService);
 const pointsModel = new PointsModel(mockService);
 
-const filtersPresenter = new FiltersPresenter();
+const filtersPresenter = new FiltersPresenter({pointsModel});
 const tripInfoPresenter = new TripInfoPresenter();
 const pointsPresenter = new PointsPresenter({
   destinationsModel,

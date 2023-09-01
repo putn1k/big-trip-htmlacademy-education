@@ -1,7 +1,12 @@
 const CITIES = ['Paris', 'London', 'Chicago', 'Tokio', 'New York', 'Moscow', 'Amsterdam', 'San-Francisco'];
 const DESCRIPTION = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt architecto labore atque!';
 const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
-const FILTER_TYPES = ['everything', 'future', 'present', 'past'];
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past'
+};
 const SortTypes = [{
   type: 'day',
   isDisabled: false,
@@ -47,7 +52,7 @@ export {
   CITIES,
   DESCRIPTION,
   EVENT_TYPES,
-  FILTER_TYPES,
+  FilterType,
   SortTypes,
   Counts,
   Price,
