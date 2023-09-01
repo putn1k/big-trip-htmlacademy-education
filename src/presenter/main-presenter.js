@@ -13,10 +13,16 @@ const mockService = new MockService();
 const destinationsModel = new DestinationsModel(mockService);
 const offersModel = new OffersModel(mockService);
 const pointsModel = new PointsModel(mockService);
+const pointsContainer = document.querySelector('.trip-events');
+const filtersContainer = document.querySelector('.trip-controls__filters');
 
-const filtersPresenter = new FiltersPresenter({pointsModel});
+const filtersPresenter = new FiltersPresenter({
+  container: filtersContainer,
+  pointsModel
+});
 const tripInfoPresenter = new TripInfoPresenter();
 const pointsPresenter = new PointsPresenter({
+  container: pointsContainer,
   destinationsModel,
   offersModel,
   pointsModel,

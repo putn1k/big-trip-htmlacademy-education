@@ -7,9 +7,8 @@ import PointPresenter from './point-presenter.js';
 import SortPresenter from './sort-presenter.js';
 import {updateItem} from '../utils.js';
 
-const pointsContainer = document.querySelector('.trip-events');
-
 export default class PointsPresenter {
+  #container = null;
   #destinationsModel = null;
   #offersModel = null;
   #pointsModel = null;
@@ -18,10 +17,12 @@ export default class PointsPresenter {
   #pointsPresenter = new Map();
 
   constructor({
+    container,
     destinationsModel,
     offersModel,
     pointsModel,
   }) {
+    this.#container = container;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#pointsModel = pointsModel;
@@ -40,7 +41,7 @@ export default class PointsPresenter {
 
   #renderSort() {
     const sortPresenter = new SortPresenter({
-      container: pointsContainer
+      container: this.#container
     });
 
     sortPresenter.init();
@@ -56,11 +57,11 @@ export default class PointsPresenter {
   };
 
   #renderEmptyList() {
-    render(new EventLisEmptytView(), pointsContainer);
+    render(new EventLisEmptytView(), this.#container);
   }
 
   #renderList() {
-    render(this.#listComponent, pointsContainer);
+    render(this.#listComponent, this.#container);
     this.#renderPoints();
   }
 
