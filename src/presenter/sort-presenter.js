@@ -5,14 +5,17 @@ import {
 import SortingView from '../view/sorting-view.js';
 import {SortType, enabledSortType} from '../const';
 
+
 export default class SortPresenter {
   #container = null;
-  #sorTypes = [];
+  #sortTypes = [];
   #currentSortType = SortType.DAY;
+  #sortTypesChangeHandler = null;
 
-  constructor({container}) {
+  constructor({container, sortTypeHandler}) {
     this.#container = container;
-    this.#sorTypes = Object.values(SortType).map((type) => ({
+    this.#sortTypesChangeHandler = sortTypeHandler;
+    this.#sortTypes = Object.values(SortType).map((type) => ({
       type,
       isChecked: (type === this.#currentSortType),
       isDisabled: !enabledSortType[type]
@@ -21,7 +24,8 @@ export default class SortPresenter {
 
   init() {
     render(new SortingView({
-      items: this.#sorTypes,
+      items: this.#sortTypes,
+      onItemChange: this.#sortTypesChangeHandler
     }), this.#container);
   }
 }
