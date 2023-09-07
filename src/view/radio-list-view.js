@@ -2,7 +2,7 @@ import AbstractView from '../framework/view/abstract-view.js';
 
 export default class RadioListView extends AbstractView {
   _items = [];
-  _handleItemChange = [];
+  _handleItemChange = null;
 
   constructor ({
     items,

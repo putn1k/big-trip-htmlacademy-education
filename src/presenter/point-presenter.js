@@ -53,7 +53,7 @@ export default class PointPresenter {
       onSubmitForm: this.#pointSubmitHandler
     });
 
-    if (prevPointComponent === null || prevPointEditComponent === null) {
+    if (!prevPointComponent || !prevPointEditComponent) {
       render(this.#pointComponent, this.#pointListContainer);
       return;
     }
