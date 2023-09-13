@@ -25,7 +25,7 @@ export default class MockService {
   points = [];
 
   constructor() {
-    this.destinations = this.generateDestinations();
+    this.destinations = this.getUniqDestinations();
     this.offers = this.generateOffers();
     this.points = this.generatePoints();
   }
@@ -41,7 +41,6 @@ export default class MockService {
   getOffers() {
     return this.offers;
   }
-
 
   generateDestinations() {
     return Array.from({
@@ -79,5 +78,15 @@ export default class MockService {
 
       return generatePoint(type, destination.id, offerIDs);
     });
+  }
+
+  getUniqDestinations() {
+    const uniqDestinations = [];
+    this.generateDestinations().forEach((destination) => {
+      if (!uniqDestinations.some((uniqDestination) => uniqDestination.name === destination.name)) {
+        uniqDestinations.push(destination);
+      }
+    });
+    return uniqDestinations;
   }
 }
