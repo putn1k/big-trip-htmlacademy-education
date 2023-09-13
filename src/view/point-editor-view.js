@@ -4,15 +4,12 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 import {
   EVENT_TYPES,
-  CITIES
 } from '../const.js';
 
 import {
   toCapitalize,
   formatStringToDelimetrDate
 } from '../utils.js';
-
-const createCitiesTemplate = (cities) => cities.reduce((markup, city)=>`${markup}<option value="${toCapitalize(city)}"></option>`, '');
 
 const createTypesListTemplate = (currentType) => {
   const typeListMarkup = EVENT_TYPES.reduce((markup, type)=>`${markup}
@@ -99,6 +96,8 @@ const createPointEditorTemplate = ({
 
   const currentDestination = pointDestinations.find(({id}) => id === state.point.destination);
   const currentPointOffers = pointOffers.find((offer) => offer.type === type).offers;
+  const listCities = pointDestinations.map(({name}) => name);
+  const createCitiesTemplate = (cities) => cities.reduce((markup, city)=>`${markup}<option value="${city}"></option>`, '');
 
   return `<li class="trip-events__item">
       <form class="event event--edit" action="#" method="post">
@@ -111,7 +110,7 @@ const createPointEditorTemplate = ({
             </label>
             <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${currentDestination ? currentDestination.name : ''}" list="destination-list-1">
             <datalist id="destination-list-1">
-              ${createCitiesTemplate(CITIES)}
+              ${createCitiesTemplate(listCities)}
             </datalist>
           </div>
 
