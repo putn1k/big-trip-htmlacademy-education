@@ -1,12 +1,12 @@
-import TripInfoPresenter from './trip-info-presenter.js';
-import FiltersPresenter from './filters-presenter.js';
-import PointsPresenter from './points-presenter.js';
+import TripInfoPresenter from './presenter/trip-info-presenter.js';
+import FiltersPresenter from './presenter/filters-presenter.js';
+import PointsPresenter from './presenter/points-presenter.js';
 
-import MockService from '../service/mock-service.js';
+import MockService from './service/mock-service.js';
 
-import DestinationsModel from '../model/destinations-model.js';
-import OffersModel from '../model/offers-model.js';
-import PointsModel from '../model/points-model.js';
+import DestinationsModel from './model/destinations-model.js';
+import OffersModel from './model/offers-model.js';
+import PointsModel from './model/points-model.js';
 
 const mockService = new MockService();
 
@@ -28,7 +28,7 @@ const pointsPresenter = new PointsPresenter({
   pointsModel,
 });
 
-export default class MainPresenter {
+export default class BigTripApp {
   init() {
     filtersPresenter.init();
     tripInfoPresenter.init();
