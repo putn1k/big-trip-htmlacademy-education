@@ -14,6 +14,12 @@ const SortType = {
   PRICE: 'price',
   OFFER: 'offer',
 };
+const EmptyListMessage = {
+  EVERYTHING : 'Click New Event to create your first point',
+  FUTURE : 'There are no future events now',
+  PRESENT : 'There are no present events now',
+  PAST : 'There are no past events now',
+};
 
 const enabledSortType = {
   [SortType.DAY]: true,
@@ -21,6 +27,18 @@ const enabledSortType = {
   [SortType.TIME]: true,
   [SortType.PRICE]: true,
   [SortType.OFFER]: false,
+};
+
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+  CREATE_POINT: 'CREATE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
 };
 
 const Counts = {
@@ -49,9 +67,12 @@ export {
   EVENT_TYPES,
   FilterType,
   SortType,
+  EmptyListMessage,
   enabledSortType,
   Counts,
   Price,
   Duration,
-  Mode
+  Mode,
+  UserAction,
+  UpdateType
 };
