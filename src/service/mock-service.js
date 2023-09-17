@@ -89,4 +89,16 @@ export default class MockService {
     });
     return uniqDestinations;
   }
+
+  updatePoint(updatedPoint) {
+    return updatedPoint;
+  }
+
+  addPoint(data) {
+    return data;
+  }
+
+  deletePoint() {
+    // method is not defined
+  }
 }
