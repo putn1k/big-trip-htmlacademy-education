@@ -76,6 +76,10 @@ const sorting = {
   },
 };
 
+const isMinorChange = (pointA, pointB) => pointA.dateFrom !== pointB.dateFrom
+  || pointA.basePrice !== pointB.basePrice
+  || calcDuration(pointA.dateFrom, pointA.dateTo) !== calcDuration(pointB.dateFrom, pointB.dateTo);
+
 export {
   MSEC_IN_HOUR,
   MSEC_IN_DAY,
@@ -89,5 +93,6 @@ export {
   calcDuration,
   updateItem,
   filter,
-  sorting
+  sorting,
+  isMinorChange
 };
