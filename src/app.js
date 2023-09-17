@@ -7,18 +7,19 @@ import MockService from './service/mock-service.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offers-model.js';
 import PointsModel from './model/points-model.js';
+import FiltersModel from './model/filters-model.js';
 
 const mockService = new MockService();
 
 const destinationsModel = new DestinationsModel(mockService);
 const offersModel = new OffersModel(mockService);
 const pointsModel = new PointsModel(mockService);
+const filtersModel = new FiltersModel();
 const pointsContainer = document.querySelector('.trip-events');
-const filtersContainer = document.querySelector('.trip-controls__filters');
 
 const filtersPresenter = new FiltersPresenter({
-  container: filtersContainer,
-  pointsModel
+  pointsModel,
+  filtersModel
 });
 const tripInfoPresenter = new TripInfoPresenter();
 const pointsPresenter = new PointsPresenter({
@@ -26,6 +27,7 @@ const pointsPresenter = new PointsPresenter({
   destinationsModel,
   offersModel,
   pointsModel,
+  filtersModel
 });
 
 export default class BigTripApp {

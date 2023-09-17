@@ -4,15 +4,17 @@ import {
 
 import FiltersView from '../view/filters-view.js';
 import {filter} from '../utils';
+import {UpdateType} from '../const';
 
 export default class FiltersPresenter {
-  #container = null;
+  #container = document.querySelector('.trip-controls__filters');
   #pointsModel = null;
+  #filtersModel = null;
   #filters = [];
 
-  constructor({container, pointsModel}) {
-    this.#container = container;
+  constructor({pointsModel, filtersModel}) {
     this.#pointsModel = pointsModel;
+    this.#filtersModel = filtersModel;
 
     this.#filters = Object.entries(filter)
       .map(([filterType, filterPoints], index) => ({
@@ -24,7 +26,12 @@ export default class FiltersPresenter {
 
   init() {
     render(new FiltersView({
-      items: this.#filters
+      items: this.#filters,
+      onItemChange: this.#filterTypesChangeHandler
     }), this.#container);
   }
+
+  #filterTypesChangeHandler = (filterType) => {
+    this.#filtersModel.set(UpdateType.MAJOR, filterType);
+  };
 }
