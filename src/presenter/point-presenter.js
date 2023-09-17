@@ -5,7 +5,8 @@ import {
 } from '../framework/render.js';
 import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view.js';
-import {Mode} from '../const.js';
+import {isMinorChange} from '../utils.js';
+import {Mode, UserAction, UpdateType} from '../const.js';
 
 export default class PointPresenter {
   #pointListContainer = null;
@@ -51,6 +52,7 @@ export default class PointPresenter {
       pointDestinations: this.#destinationsModel.get(),
       pointOffers: this.#offersModel.get(),
       onCloseClick: this.#pointCloseHandler,
+      onDeleteClick: this.#deleteClickHandler,
       onSubmitForm: this.#pointSubmitHandler
     });
 
@@ -107,15 +109,21 @@ export default class PointPresenter {
   };
 
   #pointSubmitHandler = (point) => {
-    this.#handleDataChange(point);
+    const currentType = isMinorChange(point, this.#point) ? UpdateType.MINOR : UpdateType.PATCH;
+    this.#handleDataChange(UserAction.UPDATE_POINT, currentType, point);
     this.#replaceEditorToPoint();
   };
 
   #pointCloseHandler = () => {
+    this.#pointEditComponent.reset(this.#point);
     this.#replaceEditorToPoint();
   };
 
   #onFavoriteClick = () => {
-    this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite });
+    this.#handleDataChange(UserAction.UPDATE_POINT, UpdateType.PATCH, {...this.#point, isFavorite: !this.#point.isFavorite });
+  };
+
+  #deleteClickHandler = (point) => {
+    this.#handleDataChange(UserAction.DELETE_POINT, UpdateType.MINOR, point);
   };
 }
