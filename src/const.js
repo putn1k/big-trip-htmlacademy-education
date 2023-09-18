@@ -61,6 +61,21 @@ const Mode = {
   EDITING: 'EDITING',
 };
 
+const EditType = {
+  EDITING: 'EDITING',
+  CREATING: 'CREATING',
+};
+
+const POINT_EMPTY = {
+  basePrice: 0,
+  dateFrom: null,
+  dateTo: null,
+  destination: null,
+  isFavorite: false,
+  offers: [],
+  type: EVENT_TYPES[5],
+};
+
 export {
   CITIES,
   DESCRIPTION,
@@ -74,5 +89,7 @@ export {
   Duration,
   Mode,
   UserAction,
-  UpdateType
+  UpdateType,
+  EditType,
+  POINT_EMPTY
 };

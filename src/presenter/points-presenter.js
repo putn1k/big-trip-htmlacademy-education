@@ -6,7 +6,8 @@ import SortPresenter from './sort-presenter.js';
 
 import {filter} from '../utils';
 import {sorting} from '../utils';
-import {SortType, UserAction, UpdateType} from '../const';
+import {SortType, UserAction, UpdateType, FilterType} from '../const';
+import AddPointPresenter from './add-point-presenter.js';
 
 export default class PointsPresenter {
   #container = null;
@@ -20,6 +21,9 @@ export default class PointsPresenter {
   #pointsPresenter = new Map();
   #sortPresenter = null;
   #currentSortType = SortType.DAY;
+  #addPointPresenter = null;
+  #addPointButtonPresenter = null;
+  #isCreating = false;
 
   constructor({
     container,
@@ -27,12 +31,22 @@ export default class PointsPresenter {
     offersModel,
     pointsModel,
     filtersModel,
+    addPointButtonPresenter
   }) {
     this.#container = container;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#pointsModel = pointsModel;
     this.#filtersModel = filtersModel;
+    this.#addPointButtonPresenter = addPointButtonPresenter;
+
+    this.#addPointPresenter = new AddPointPresenter({
+      container: this.#listComponent.element,
+      destinationsModel: this.#destinationsModel,
+      offersModel: this.#offersModel,
+      onDataChange: this.#handleViewAction,
+      onDestroy: this.#addPointDestroyHandler,
+    });
 
     this.#pointsModel.addObserver(this.#modelEventHandler);
     this.#filtersModel.addObserver(this.#modelEventHandler);
@@ -49,8 +63,16 @@ export default class PointsPresenter {
     this.#renderBoard();
   }
 
+  addPointButtonClickHandler = () => {
+    this.#isCreating = true;
+    this.#currentSortType = SortType.DAY;
+    this.#filtersModel.set(UpdateType.MAJOR, FilterType.EVERYTHING);
+    this.#addPointButtonPresenter.disableButton();
+    this.#addPointPresenter.init();
+  };
+
   #renderBoard() {
-    if (!this.points.length) {
+    if (this.points.length === 0 && !this.#isCreating) {
       this.#renderEmptyList();
       return;
     }
@@ -102,13 +124,13 @@ export default class PointsPresenter {
   #clearPoints = () => {
     this.#pointsPresenter.forEach((presenter) => presenter.destroy());
     this.#pointsPresenter.clear();
+    this.#addPointPresenter.destroy();
   };
 
   #clearBoard = ({resetSortType = false} = {}) => {
     this.#clearPoints();
     this.#sortPresenter.destroy();
     remove(this.#emptyListComponent);
-    // this.#sortPresenter = null;
 
     if(resetSortType) {
       this.#currentSortType = SortType.DAY;
@@ -117,6 +139,16 @@ export default class PointsPresenter {
 
   #handleModeChange = () => {
     this.#pointsPresenter.forEach((presenter) => presenter.resetView());
+    this.#addPointPresenter.destroy();
+  };
+
+  #addPointDestroyHandler = ({isCanceled}) => {
+    this.#isCreating = false;
+    this.#addPointButtonPresenter.enableButton();
+    if (this.points.length === 0 && isCanceled) {
+      this.#clearBoard();
+      this.#renderBoard();
+    }
   };
 
   #handleViewAction = (actionType, updateType, update) => {

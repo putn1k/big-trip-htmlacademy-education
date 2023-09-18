@@ -1,6 +1,7 @@
 import TripInfoPresenter from './presenter/trip-info-presenter.js';
 import FiltersPresenter from './presenter/filters-presenter.js';
 import PointsPresenter from './presenter/points-presenter.js';
+import AddPointButtonPresenter from './presenter/add-point-button-presenter.js';
 
 import MockService from './service/mock-service.js';
 
@@ -15,23 +16,33 @@ const destinationsModel = new DestinationsModel(mockService);
 const offersModel = new OffersModel(mockService);
 const pointsModel = new PointsModel(mockService);
 const filtersModel = new FiltersModel();
+const tripMainContainer = document.querySelector('.trip-main');
 const pointsContainer = document.querySelector('.trip-events');
 
 const filtersPresenter = new FiltersPresenter({
   pointsModel,
   filtersModel
 });
-const tripInfoPresenter = new TripInfoPresenter();
+const tripInfoPresenter = new TripInfoPresenter({
+  container: tripMainContainer
+});
+const addPointButtonPresenter = new AddPointButtonPresenter({
+  container: tripMainContainer
+});
 const pointsPresenter = new PointsPresenter({
   container: pointsContainer,
   destinationsModel,
   offersModel,
   pointsModel,
-  filtersModel
+  filtersModel,
+  addPointButtonPresenter: addPointButtonPresenter
 });
 
 export default class BigTripApp {
   init() {
+    addPointButtonPresenter.init({
+      onButtonClick: pointsPresenter.addPointButtonClickHandler
+    });
     filtersPresenter.init();
     tripInfoPresenter.init();
     pointsPresenter.init();
