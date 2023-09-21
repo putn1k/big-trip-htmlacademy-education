@@ -13,14 +13,14 @@ export default class SortPresenter {
   #currentSortType = SortType.DAY;
   #sortTypesChangeHandler = null;
 
-  constructor({container, sortTypeHandler}) {
+  constructor({container, onSortTypeChange}) {
     this.#container = container;
-    this.#sortTypesChangeHandler = sortTypeHandler;
     this.#sortTypes = Object.values(SortType).map((type) => ({
       type,
       isChecked: (type === this.#currentSortType),
       isDisabled: !enabledSortType[type]
     }));
+    this.#sortTypesChangeHandler = onSortTypeChange;
   }
 
   init() {

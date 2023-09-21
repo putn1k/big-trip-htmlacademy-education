@@ -44,7 +44,7 @@ export default class PointsPresenter {
       container: this.#listComponent.element,
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel,
-      onDataChange: this.#handleViewAction,
+      onPointChange: this.#handleViewAction,
       onDestroy: this.#addPointDestroyHandler,
     });
 
@@ -115,7 +115,7 @@ export default class PointsPresenter {
   #renderSort() {
     this.#sortPresenter = new SortPresenter({
       container: this.#container,
-      sortTypeHandler: this.#sortTypesChangeHandler
+      onSortTypeChange: this.#sortTypesChangeHandler
     });
 
     this.#sortPresenter.init();

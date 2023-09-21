@@ -24,7 +24,8 @@ const filtersPresenter = new FiltersPresenter({
   filtersModel
 });
 const tripInfoPresenter = new TripInfoPresenter({
-  container: tripMainContainer
+  container: tripMainContainer,
+  pointsModel
 });
 const addPointButtonPresenter = new AddPointButtonPresenter({
   container: tripMainContainer
@@ -40,11 +41,11 @@ const pointsPresenter = new PointsPresenter({
 
 export default class BigTripApp {
   init() {
+    tripInfoPresenter.init();
+    filtersPresenter.init();
     addPointButtonPresenter.init({
       onButtonClick: pointsPresenter.addPointButtonClickHandler
     });
-    filtersPresenter.init();
-    tripInfoPresenter.init();
     pointsPresenter.init();
   }
 }

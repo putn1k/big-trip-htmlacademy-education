@@ -44,7 +44,7 @@ export default class PointPresenter {
       pointDestination: this.#destinationsModel.getById(point.destination),
       pointOffers: this.#offersModel.getByType(point.type),
       onEditClick: this.#pointEditHandler,
-      onFavoriteClick: this.#onFavoriteClick
+      onFavoriteClick: this.#favoriteClickHandler
     });
 
     this.#pointEditComponent = new PointEditorView({
@@ -53,7 +53,7 @@ export default class PointPresenter {
       pointOffers: this.#offersModel.get(),
       onCloseClick: this.#pointCloseHandler,
       onDeleteClick: this.#deleteClickHandler,
-      onSubmitForm: this.#pointSubmitHandler
+      onFormSubmit: this.#pointSubmitHandler
     });
 
     if (!prevPointComponent || !prevPointEditComponent) {
@@ -119,7 +119,7 @@ export default class PointPresenter {
     this.#replaceEditorToPoint();
   };
 
-  #onFavoriteClick = () => {
+  #favoriteClickHandler = () => {
     this.#handleDataChange(UserAction.UPDATE_POINT, UpdateType.PATCH, {...this.#point, isFavorite: !this.#point.isFavorite });
   };
 

@@ -12,11 +12,11 @@ export default class AddPointPresenter {
   #handleDataChange = null;
   #handleDestroy = null;
 
-  constructor({container, destinationsModel, offersModel, onDataChange, onDestroy}) {
+  constructor({container, destinationsModel, offersModel, onPointChange, onDestroy}) {
     this.#container = container;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
-    this.#handleDataChange = onDataChange;
+    this.#handleDataChange = onPointChange;
     this.#handleDestroy = onDestroy;
   }
 
@@ -29,7 +29,7 @@ export default class AddPointPresenter {
       pointDestinations: this.#destinationsModel.get(),
       pointOffers: this.#offersModel.get(),
       onCloseClick: this.#cancelClickHandler,
-      onSubmitForm: this.#formSubmitHandler,
+      onFormSubmit: this.#formSubmitHandler,
       editorMode: EditType.CREATING
     });
 

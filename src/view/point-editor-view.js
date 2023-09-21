@@ -156,7 +156,7 @@ export default class PointEditorView extends AbstractStatefulView {
   #pointDestinations = null;
   #pointOffers = null;
   #onCloseClick = null;
-  #onSubmitForm = null;
+  #onFormSubmit = null;
   #onDeleteClick = null;
   #datepickerFrom = null;
   #datepickerTo = null;
@@ -167,16 +167,16 @@ export default class PointEditorView extends AbstractStatefulView {
     pointDestinations,
     pointOffers,
     onCloseClick,
-    onSubmitForm,
     onDeleteClick,
+    onFormSubmit,
     editorMode = EditType.EDITING
   }) {
     super();
     this.#pointDestinations = pointDestinations;
     this.#pointOffers = pointOffers;
     this.#onCloseClick = onCloseClick;
-    this.#onSubmitForm = onSubmitForm;
     this.#onDeleteClick = onDeleteClick;
+    this.#onFormSubmit = onFormSubmit;
     this.#editorMode = editorMode;
 
     this._setState(PointEditorView.parsePointToState({point}));
@@ -231,7 +231,7 @@ export default class PointEditorView extends AbstractStatefulView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#onSubmitForm(PointEditorView.parseStateToPoint(this._state));
+    this.#onFormSubmit(PointEditorView.parseStateToPoint(this._state));
   };
 
   #deleteClickHandler = (evt) => {
