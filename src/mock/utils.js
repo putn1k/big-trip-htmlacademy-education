@@ -1,11 +1,14 @@
 import dayjs from 'dayjs';
 import {
   Duration
-} from '../const.js';
-import {
-  getRandomPositiveNumber
-} from '../utils.js';
+} from './const.js';
 
+const getRandomPositiveNumber = (min = 0, max = 1) => {
+  const lower = Math.ceil(Math.min(min, max));
+  const upper = Math.floor(Math.max(min, max));
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
+const getRandomArrayElement = (items) => items[getRandomPositiveNumber(0, items.length - 1)];
 let randomDate = dayjs().subtract(getRandomPositiveNumber(0, Duration.DAY), 'day').toDate();
 
 const getDate = ({
@@ -26,5 +29,7 @@ const getDate = ({
 };
 
 export {
+  getRandomPositiveNumber,
+  getRandomArrayElement,
   getDate
 };

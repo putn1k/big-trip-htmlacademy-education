@@ -1,16 +1,13 @@
 import {
   Price
-} from '../const.js';
-
-import {
-  getDate,
-} from './utils.js';
+} from './const.js';
 
 import {
   getRandomPositiveNumber,
-} from '../utils.js';
+  getDate,
+} from './utils.js';
 
-const generatePoint = (type, destinationID, offerIDs) => ({
+const generateMockPoint = (type, destinationID, offerIDs) => ({
   id: crypto.randomUUID(),
   basePrice: getRandomPositiveNumber(Price.MIN, Price.MAX),
   dateFrom: getDate({
@@ -26,5 +23,5 @@ const generatePoint = (type, destinationID, offerIDs) => ({
 });
 
 export {
-  generatePoint
+  generateMockPoint
 };
