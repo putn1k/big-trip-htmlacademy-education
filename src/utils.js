@@ -2,14 +2,16 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativetime from 'dayjs/plugin/relativeTime';
 import {
-  MSEC_IN_HOUR,
-  MSEC_IN_DAY,
+  TimePeriods,
 } from './const.js';
 import {FilterType} from './const.js';
 import {SortType} from './const.js';
 
 dayjs.extend(duration);
 dayjs.extend(relativetime);
+
+const MSEC_IN_HOUR = TimePeriods.MSEC_IN_SEC * TimePeriods.SEC_IN_MIN * TimePeriods.MIN_IN_HOUR;
+const MSEC_IN_DAY = TimePeriods.MSEC_IN_HOUR * TimePeriods.HOUR_IN_DAY;
 
 const formatStringToDate = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
 const formatStringToDelimetrDate = (date) => dayjs(date).format('DD/MM/YY HH:mm');

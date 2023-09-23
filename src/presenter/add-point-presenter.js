@@ -21,7 +21,7 @@ export default class AddPointPresenter {
   }
 
   init() {
-    if (this.#addPointComponent !== null) {
+    if (this.#addPointComponent) {
       return;
     }
 

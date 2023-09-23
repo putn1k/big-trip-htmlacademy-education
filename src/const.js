@@ -1,11 +1,12 @@
 const DEFAULT_EVENT_TYPE = 'flight';
 const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
-const MSEC_IN_SEC = 1000;
-const SEC_IN_MIN = 60;
-const MIN_IN_HOUR = 60;
-const HOUR_IN_DAY = 24;
-const MSEC_IN_HOUR = MSEC_IN_SEC * SEC_IN_MIN * MIN_IN_HOUR;
-const MSEC_IN_DAY = MSEC_IN_HOUR * HOUR_IN_DAY;
+
+const TimePeriods = {
+  SEC_IN_MIN : 60,
+  MIN_IN_HOUR : 60,
+  HOUR_IN_DAY : 24,
+  MSEC_IN_SEC : 1000,
+};
 
 const POINT_EMPTY = {
   basePrice: 0,
@@ -64,8 +65,7 @@ const EditType = {
 
 export {
   EVENT_TYPES,
-  MSEC_IN_HOUR,
-  MSEC_IN_DAY,
+  TimePeriods,
   POINT_EMPTY,
   FilterType,
   SortType,
