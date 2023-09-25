@@ -1,17 +1,11 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativetime from 'dayjs/plugin/relativeTime';
-import {
-  TimePeriods,
-} from './const.js';
 import {FilterType} from './const.js';
 import {SortType} from './const.js';
 
 dayjs.extend(duration);
 dayjs.extend(relativetime);
-
-const MSEC_IN_HOUR = TimePeriods.MSEC_IN_SEC * TimePeriods.SEC_IN_MIN * TimePeriods.MIN_IN_HOUR;
-const MSEC_IN_DAY = TimePeriods.MSEC_IN_HOUR * TimePeriods.HOUR_IN_DAY;
 
 const formatStringToDate = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
 const formatStringToDelimetrDate = (date) => dayjs(date).format('DD/MM/YY HH:mm');
@@ -19,16 +13,14 @@ const formatStringToShortDate = (date) => dayjs(date).format('MMM DD');
 const formatStringToTime = (date) => dayjs(date).format('HH:mm');
 const calcDuration = (dateFrom, dateTo) => {
   const diff = dayjs(dateTo).diff(dayjs(dateFrom));
-
-  if (diff >= MSEC_IN_DAY) {
-    return dayjs.duration(diff).format('DD[D] HH[H] mm[M]');
+  const eventDuration = dayjs.duration(diff);
+  if (eventDuration.days()) {
+    return eventDuration.format('DD[D] HH[H] mm[M]');
   }
-  if (diff >= MSEC_IN_HOUR) {
-    return dayjs.duration(diff).format('HH[H] mm[M]');
+  if (eventDuration.hours()) {
+    return eventDuration.format('HH[H] mm[M]');
   }
-  if (diff < MSEC_IN_HOUR) {
-    return dayjs.duration(diff).format('mm[M]');
-  }
+  return eventDuration.format('mm[M]');
 };
 const toCapitalize = (str) => `${str[0].toUpperCase()}${str.slice(1)}`;
 const updateItem = (items, update) => items.map((item) => item.id === update.id ? update : item);

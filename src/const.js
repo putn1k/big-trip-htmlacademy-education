@@ -1,13 +1,6 @@
 const DEFAULT_EVENT_TYPE = 'flight';
 const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
-const TimePeriods = {
-  SEC_IN_MIN : 60,
-  MIN_IN_HOUR : 60,
-  HOUR_IN_DAY : 24,
-  MSEC_IN_SEC : 1000,
-};
-
 const POINT_EMPTY = {
   basePrice: 0,
   dateFrom: null,
@@ -53,6 +46,7 @@ const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
+  INIT: 'INIT',
 };
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -78,7 +72,6 @@ const SourceUrl = {
 
 export {
   EVENT_TYPES,
-  TimePeriods,
   POINT_EMPTY,
   FilterType,
   SortType,
