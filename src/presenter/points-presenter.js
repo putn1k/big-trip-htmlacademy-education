@@ -8,13 +8,8 @@ import SortPresenter from './sort-presenter.js';
 
 import {filter} from '../utils';
 import {sorting} from '../utils';
-import {SortType, UserAction, UpdateType, FilterType} from '../const';
+import {SortType, UserAction, UpdateType, FilterType, TimeLimit} from '../const';
 import AddPointPresenter from './add-point-presenter.js';
-
-const TimeLimit = {
-  LOWER_LIMIT: 350,
-  UPPER_LIMIT: 1000,
-};
 
 export default class PointsPresenter {
   #container = null;
