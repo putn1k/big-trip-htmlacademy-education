@@ -66,7 +66,8 @@ export default class PointPresenter {
     }
 
     if(this.#mode === Mode.EDITING) {
-      replace(this.#pointEditComponent, prevPointEditComponent);
+      replace(this.#pointComponent, prevPointEditComponent);
+      this.#mode = Mode.DEFAULT;
     }
 
     remove(prevPointComponent);
@@ -75,6 +76,7 @@ export default class PointPresenter {
 
   resetView() {
     if(this.#mode !== Mode.DEFAULT) {
+      this.#pointEditComponent.reset(this.#point);
       this.#replaceEditorToPoint();
     }
   }
@@ -95,7 +97,8 @@ export default class PointPresenter {
 
   setAborting = () => {
     if(this.#mode === Mode.DEFAULT) {
-      this.#pointEditComponent.shake();
+      this.#pointComponent.shake();
+      return;
     }
     if(this.#mode === Mode.EDITING) {
       const resetFormState = () => {
@@ -111,10 +114,12 @@ export default class PointPresenter {
   };
 
   setDeleting = () => {
-    this.#pointEditComponent.updateElement({
-      isDisabled: true,
-      isDeleting: true,
-    });
+    if(this.#mode === Mode.EDITING) {
+      this.#pointEditComponent.updateElement({
+        isDisabled: true,
+        isDeleting: true,
+      });
+    }
   };
 
   #replacePointToEditor() {
@@ -133,7 +138,7 @@ export default class PointPresenter {
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      this.#replaceEditorToPoint();
+      this.resetView();
     }
   };
 
@@ -144,12 +149,10 @@ export default class PointPresenter {
   #pointSubmitHandler = (point) => {
     const currentType = isMinorChange(point, this.#point) ? UpdateType.MINOR : UpdateType.PATCH;
     this.#handleDataChange(UserAction.UPDATE_POINT, currentType, point);
-    this.#replaceEditorToPoint();
   };
 
   #pointCloseHandler = () => {
-    this.#pointEditComponent.reset(this.#point);
-    this.#replaceEditorToPoint();
+    this.resetView();
   };
 
   #favoriteClickHandler = () => {
