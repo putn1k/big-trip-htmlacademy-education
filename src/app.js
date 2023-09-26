@@ -33,7 +33,9 @@ const filtersPresenter = new FiltersPresenter({
 });
 const tripInfoPresenter = new TripInfoPresenter({
   container: tripMainContainer,
-  pointsModel
+  destinationsModel,
+  offersModel,
+  pointsModel,
 });
 const addPointButtonPresenter = new AddPointButtonPresenter({
   container: tripMainContainer

@@ -1,5 +1,6 @@
 const DEFAULT_EVENT_TYPE = 'flight';
 const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+const DESTINATIONS_ITEMS_COUNT = 3;
 
 const POINT_EMPTY = {
   basePrice: 0,
@@ -71,6 +72,7 @@ const SourceUrl = {
 };
 
 export {
+  DESTINATIONS_ITEMS_COUNT,
   EVENT_TYPES,
   POINT_EMPTY,
   FilterType,
