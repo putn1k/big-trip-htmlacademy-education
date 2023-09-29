@@ -118,7 +118,7 @@ const createPointEditorTemplate = ({
 
   const isCreating = editorMode === EditType.CREATING;
   const currentDestination = pointDestinations.find(({id}) => id === state.point.destination);
-  const currentPointOffers = pointOffers.find((offer) => offer.type === type).offers;
+  const currentPointOffers = pointOffers.find((offer) => offer.type === type)?.offers;
   const listCities = pointDestinations.map(({name}) => he.encode(name));
   const createCitiesTemplate = (cities) => cities.reduce((markup, city)=>`${markup}<option value="${he.encode(city)}"></option>`, '');
 
@@ -158,7 +158,7 @@ const createPointEditorTemplate = ({
 
         </header>
         <section class="event__details">
-          ${createOffersTemplate(currentPointOffers, offers)}
+          ${currentPointOffers ? createOffersTemplate(currentPointOffers, offers) : ''}
           ${createDestinationTemplate(currentDestination)}
         </section>
       </form>

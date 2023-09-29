@@ -149,7 +149,7 @@ export default class PointsPresenter {
 
   #clearBoard = ({resetSortType = false} = {}) => {
     this.#clearPoints();
-    this.#sortPresenter.destroy();
+    this.#sortPresenter?.destroy();
     remove(this.#emptyListComponent);
 
     if(resetSortType) {
