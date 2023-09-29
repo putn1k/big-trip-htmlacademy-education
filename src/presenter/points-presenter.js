@@ -28,6 +28,7 @@ export default class PointsPresenter {
   #addPointButtonPresenter = null;
   #isCreating = false;
   #isLoading = true;
+  #isError = false;
   #uiBlocker = new UiBlocker({
     lowerLimit: TimeLimit.LOWER_LIMIT,
     upperLimit: TimeLimit.UPPER_LIMIT,
@@ -86,11 +87,17 @@ export default class PointsPresenter {
       return;
     }
 
+    if (this.#isError) {
+      this.#addPointButtonPresenter.disableButton();
+      return;
+    }
+
     if (this.points.length === 0 && !this.#isCreating) {
       this.#addPointButtonPresenter.enableButton();
       this.#renderEmptyList();
       return;
     }
+
 
     this.#addPointButtonPresenter.enableButton();
     this.#renderSort();
@@ -216,6 +223,7 @@ export default class PointsPresenter {
     }
     if(updateType === UpdateType.INIT) {
       this.#isLoading = false;
+      this.#isError = data.isError;
       remove(this.#loadingComponent);
       this.#renderBoard();
     }
