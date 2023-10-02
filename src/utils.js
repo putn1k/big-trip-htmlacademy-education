@@ -11,7 +11,7 @@ dayjs.extend(duration);
 dayjs.extend(relativetime);
 
 const formatStringToDate = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
-const formatStringToDelimetrDate = (date) => dayjs(date).format('DD/MM/YY HH:mm');
+const formatStringToDelimiterDate = (date) => dayjs(date).format('DD/MM/YY HH:mm');
 const formatStringToShortDate = (date) => dayjs(date).format('MMM DD');
 const formatStringToTime = (date) => dayjs(date).format('HH:mm');
 const calcDuration = (dateFrom, dateTo) => {
@@ -112,7 +112,7 @@ export {
   formatStringToDate,
   formatStringToShortDate,
   formatStringToTime,
-  formatStringToDelimetrDate,
+  formatStringToDelimiterDate,
   toCapitalize,
   calcDuration,
   updateItem,

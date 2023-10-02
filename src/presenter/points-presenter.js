@@ -2,7 +2,7 @@ import {render, remove} from '../framework/render.js';
 import UiBlocker from '../framework/ui-blocker/ui-blocker.js';
 import LoadingView from '../view/loading-view.js';
 import EventListView from '../view/event-list-view.js';
-import EventLisEmptytView from '../view/event-list-empty-view.js';
+import EventListEmptyView from '../view/event-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
 import SortPresenter from './sort-presenter.js';
 
@@ -110,7 +110,7 @@ export default class PointsPresenter {
   }
 
   #renderEmptyList() {
-    this.#emptyListComponent = new EventLisEmptytView({
+    this.#emptyListComponent = new EventListEmptyView({
       filterType: this.#filtersModel.get()
     });
     render(this.#emptyListComponent, this.#container);
